@@ -1,0 +1,33 @@
+.car{
+    z-index: 100;
+    position:absolute;
+    width:50%;
+    height:100px;
+    background-color: aqua;
+    border-radius: 5px;
+    transition:transform 0.05s linear; /* Плавность движения */
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Колеса внизу */
+    padding: 5px 0; /* Отступ для колес */
+    box-sizing: border-box;
+}
+
+.car::before,
+.car::after{
+    content:"";
+    width:15px;
+    height: 15px;
+    background-color: black;
+    border-radius: 50%;
+    position:absolute;
+    bottom:5px;/* Позиция колес */
+}
+
+.car::before {
+  left: 5px; /* Переднее левое колесо */
+}
+
+.car::after {
+  right: 5px; /* Переднее правое колесо */
+}
