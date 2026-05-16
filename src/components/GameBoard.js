@@ -4,7 +4,7 @@ import './GameBoard.css';
 
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
-const CAR_SIZE = { width: 50, height: 100 };
+const CAR_SIZE = { width: 30, height: 40 };
 const MOVE_SPEED = 5;// Пикселей за шаг
 const TURN_SPEED = 3;// Градусов за шаг
 

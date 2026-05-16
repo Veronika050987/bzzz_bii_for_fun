@@ -1,10 +1,10 @@
 .car{
     z-index: 100;
     position:absolute;
-    width:50%;
+    width:30%;
     height:100px;
     background-color: aqua;
-    border-radius: 5px;
+    border-radius: 14px;
     transition:transform 0.05s linear; /* Плавность движения */
     display:flex;
     justify-content: space-between;
@@ -16,8 +16,8 @@
 .car::before,
 .car::after{
     content:"";
-    width:15px;
-    height: 15px;
+    width:45px;
+    height: 45px;
     background-color: black;
     border-radius: 50%;
     position:absolute;
