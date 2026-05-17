@@ -23,6 +23,10 @@ const GameBoard = () => {
     carStateRef.current = carState;// Синхронизируем useRef с текущим состоянием
 
     const[keysPressed, setKeysPressed] = useState({});
+    const [isGameRunning, setIsGameRunning] = useState(true); // Состояние для управления запуском игры
+
+    // Для хранения ID запроса анимации, чтобы его можно было отменить
+    const animationFrameId = useRef(null);
 
     useEffect(()=>{
         // Обработчик нажатия клавиш
@@ -53,6 +57,10 @@ const GameBoard = () => {
    useEffect(() => {
 
     const gameLoop = () => {
+      if (!isGameRunning) { // Останавливаем цикл, если игра не запущена
+        return;
+      }
+
       let newPosition = { ...carStateRef.current.position };
       let newRotation = carStateRef.current.rotation;
       let moved = false; // Флаг, показывающий, было ли движение
@@ -98,15 +106,30 @@ const GameBoard = () => {
       }
 
       // Запрос следующего кадра анимации
-      requestAnimationFrame(gameLoop);
+      animationFrameId.current = requestAnimationFrame(gameLoop);
     };
 
-   requestAnimationFrame(gameLoop); // Запускаем игровой цикл
+   animationFrameId.current = requestAnimationFrame(gameLoop); // Запускаем игровой цикл
 
     // Очистка при размонтировании (хотя requestAnimationFrame сам остановится)
-    return () => cancelAnimationFrame(gameLoop);
+    return () => {
+      cancelAnimationFrame(animationFrameId.current);
+    };
 
-  }, [keysPressed]); // Перезапускаем эффект, если меняются нажатые клавиши
+  }, [keysPressed, isGameRunning]); // Перезапускаем эффект, если меняются нажатые клавиши
+
+
+  const handleStopGame = () => {
+    setIsGameRunning(false);
+    // Можно добавить дополнительную логику, если нужно
+  };
+
+  const handleStartGame = () => {
+    setIsGameRunning(true);
+    // Перезапускаем игровой цикл, если он был остановлен
+    // Это необходимо, чтобы игра продолжила работать после нажатия "Start"
+    // Можно использовать useRef для сохранения анимационного ID и затем отменить его
+  };
 
   return (
     <div className="game-board">
@@ -116,6 +139,13 @@ const GameBoard = () => {
       <div className="game-area">
         <Car position={carState.position} rotation={carState.rotation} />
         {/* Здесь могут быть другие объекты: дороги, препятствия и т.д. */}
+      </div>
+      <div className="controls">
+        {!isGameRunning ? (
+          <button onClick={handleStartGame}>Start</button>
+        ) : (
+          <button onClick={handleStopGame}>Stop</button>
+        )}
       </div>
     </div>
   );

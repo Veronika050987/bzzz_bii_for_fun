@@ -1,7 +1,7 @@
 .car {
   z-index: 100;
   position: absolute;
-  width: 30%;
+  width: 16%;
   height: 100px;
   background-color: #a3e2f0; /* Нежный голубой цвет, похожий на картинку */
   border-radius: 14px;
