@@ -51,7 +51,6 @@ const GameBoard = () => {
 
     // Игровой цикл
    useEffect(() => {
-    let animationFrameId; // Для отмены requestAnimationFrame
 
     const gameLoop = () => {
       let newPosition = { ...carStateRef.current.position };
@@ -82,7 +81,7 @@ const GameBoard = () => {
       }
 
       // Ограничения по краям игрового поля
-      const halfCarWidth = CAR_SIZE.width / 2;
+      const halfCarWidth = CAR_SIZE.width / 2;// Это для центрирования
       const halfCarHeight = CAR_SIZE.height / 2;
 
       if (newPosition.x < 0) newPosition.x = 0;
@@ -99,10 +98,10 @@ const GameBoard = () => {
       }
 
       // Запрос следующего кадра анимации
-      animationFrameId = requestAnimationFrame(gameLoop);
+      requestAnimationFrame(gameLoop);
     };
 
-    animationFrameId = requestAnimationFrame(gameLoop); // Запускаем игровой цикл
+   requestAnimationFrame(gameLoop); // Запускаем игровой цикл
 
     // Очистка при размонтировании (хотя requestAnimationFrame сам остановится)
     return () => cancelAnimationFrame(gameLoop);

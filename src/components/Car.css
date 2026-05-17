@@ -1,27 +1,55 @@
-.car{
-    z-index: 100;
-    position:absolute;
-    width:30%;
-    height:100px;
-    background-color: aqua;
-    border-radius: 14px;
-    transition:transform 0.05s linear; /* Плавность движения */
-    display:flex;
-    justify-content: space-between;
-    align-items: flex-end; /* Колеса внизу */
-    padding: 5px 0; /* Отступ для колес */
-    box-sizing: border-box;
+.car {
+  z-index: 100;
+  position: absolute;
+  width: 30%;
+  height: 100px;
+  background-color: #a3e2f0; /* Нежный голубой цвет, похожий на картинку */
+  border-radius: 14px;
+  transition: transform 0.05s linear;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 5px 0;
+  box-sizing: border-box;
+  overflow: hidden; /* Чтобы скрыть части, выходящие за пределы */
+  border-bottom-left-radius: 30px; /* Скругляем нижние углы */
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 10px; /* Более острые верхние углы */
+  border-top-right-radius: 10px;
 }
 
+/* Создание двух отдельных колес */
 .car::before,
-.car::after{
-    content:"";
-    width:45px;
-    height: 45px;
-    background-color: black;
-    border-radius: 50%;
-    position:absolute;
-    bottom:5px;/* Позиция колес */
+.car::after {
+  content: "";
+  width: 50px; /* Увеличим размер колес */
+  height: 50px;
+  background-color: #333; /* Темно-серый для колес */
+  border-radius: 50%;
+  position: absolute;
+  bottom: -15px; /* Опускаем колеса ниже */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Переднее колесо */
+.car::before {
+  left: 20%; /* Расположение переднего колеса */
+  box-shadow: inset 0 0 0 5px #888; /* Внутренний круг для диска */
+}
+
+/* Заднее колесо */
+.car::after {
+  right: 20%; /* Расположение заднего колеса */
+  box-shadow: inset 0 0 0 5px #888; /* Внутренний круг для диска */
+}
+
+/* Добавление фар */
+.car::before,
+.car::after {
+  position: absolute;
+  bottom: 5px; /* Позиция колес */
 }
 
 .car::before {
